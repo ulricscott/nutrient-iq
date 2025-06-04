@@ -1,0 +1,20 @@
+<div class="column is-3">
+  <div class="card">
+    <header class="card-header is-bold">
+      <b class="card-header-title is-centered">
+        <%= entry.meal_type %>
+      </b>
+    </header> 
+    <div class="card-content">
+      <div class="content">
+        <p><span class="has-text-weight-bold"><%= entry.calories %></span> calories</p>
+        <p><span class="has-text-weight-bold"><%= entry.proteins %></span> <%= entry.proteins == 1 ? 'gram' : 'grams' %> of proteins</p>
+        <p><span class="has-text-weight-bold"><%= entry.carbohydrates %></span> <%= entry.carbohydrates == 1 ? 'gram' : 'grams' %> of carbohydrates</p>
+        <p><span class="has-text-weight-bold"><%= entry.fats %></span> <%= entry.fats == 1 ? 'gram' : 'grams' %> of fats</p>
+        <p class="italic">Logged: <%= time_ago_in_words(entry.created_at) %> ago</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
