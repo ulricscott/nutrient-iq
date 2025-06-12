@@ -1,39 +1,187 @@
-<%= form_with(model: entry) do |form| %>
+<%= form_with(model: entry, local: true, class: "food-log-form") do |form| %>
   <% if entry.errors.any? %>
-    <div class="message is-danger">
-      <div class="message-header">
-        <p><%= pluralize(entry.errors.count, "error") %> prohibited this entry from being saved:</p>
-      </div>
-      <div class="message-body">
-        <ul>
-          <% entry.errors.each do |error| %>
-            <li><%= error.full_message %></li>
-          <% end %>
-        </ul>
-      </div>
+    <div class="notification is-danger is-light">
+      <button class="delete" onclick="this.parentElement.style.display='none'"></button>
+      <strong><%= pluralize(entry.errors.count, "error") %> prohibited this entry from being saved:</strong>
+      <ul class="mt-2">
+        <% entry.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
     </div>
   <% end %>
-  <div>
-    <%= form.label :meal_type, class: "label", style: "display: block" %>
-    <%= form.text_field :meal_type, class: "input" %>
+
+  <!-- Meal Type Field with Dropdown -->
+  <div class="field">
+    <%= form.label :meal_type, class: "label" do %>
+      <span class="icon-text">
+        <span class="icon is-small">
+          <i class="fas fa-utensils"></i>
+        </span>
+        <span>Meal Type</span>
+      </span>
+    <% end %>
+    <div class="control has-icons-left">
+      <%= form.select :meal_type, 
+          options_for_select([
+            ['Breakfast', 'breakfast'],
+            ['Lunch', 'lunch'], 
+            ['Dinner', 'dinner'],
+            ['Snack', 'snack']
+          ], entry.meal_type),
+          { prompt: 'Select meal type' },
+          { class: "select is-fullwidth" } %>
+      <div class="icon is-small is-left">
+        <i class="fas fa-utensils"></i>
+      </div>
+    </div>
   </div>
-  <div>
-    <%= form.label :calories, class: "label", style: "display: block" %>
-    <%= form.number_field :calories, class: "input" %>
+
+  <!-- Nutrition Fields in a Responsive Grid -->
+  <div class="field is-grouped-multiline">
+    <!-- Calories -->
+    <div class="control is-expanded">
+      <%= form.label :calories, class: "label" do %>
+        <span class="icon-text">
+          <span class="icon is-small">
+            <i class="fas fa-fire"></i>
+          </span>
+          <span>Calories</span>
+        </span>
+      <% end %>
+      <div class="control has-icons-left has-icons-right">
+        <%= form.number_field :calories, 
+            class: "input", 
+            placeholder: "0",
+            min: 0,
+            step: 1 %>
+        <span class="icon is-small is-left">
+          <i class="fas fa-fire"></i>
+        </span>
+        <span class="icon is-small is-right">
+          <span class="has-text-grey-light">kcal</span>
+        </span>
+      </div>
+    </div>
   </div>
-  <div>
-    <%= form.label :proteins, class: "label", style: "display: block" %>
-    <%= form.number_field :proteins, class: "input" %>
+
+  <!-- Macronutrients in Columns -->
+  <div class="field">
+    <label class="label">Macronutrients</label>
+    <div class="columns is-mobile">
+      <div class="column">
+        <%= form.label :proteins, class: "label is-small" do %>
+          <span class="icon-text">
+            <span class="icon is-small">
+              <i class="fas fa-drumstick-bite"></i>
+            </span>
+            <span>Protein</span>
+          </span>
+        <% end %>
+        <div class="control has-icons-right">
+          <%= form.number_field :proteins, 
+              class: "input is-small", 
+              placeholder: "0",
+              min: 0,
+              step: 0.1 %>
+          <span class="icon is-small is-right">
+            <span class="has-text-grey-light">g</span>
+          </span>
+        </div>
+      </div>
+
+      <div class="column">
+        <%= form.label :carbohydrates, class: "label is-small" do %>
+          <span class="icon-text">
+            <span class="icon is-small">
+              <i class="fas fa-bread-slice"></i>
+            </span>
+            <span>Carbs</span>
+          </span>
+        <% end %>
+        <div class="control has-icons-right">
+          <%= form.number_field :carbohydrates, 
+              class: "input is-small", 
+              placeholder: "0",
+              min: 0,
+              step: 0.1 %>
+          <span class="icon is-small is-right">
+            <span class="has-text-grey-light">g</span>
+          </span>
+        </div>
+      </div>
+
+      <div class="column">
+        <%= form.label :fats, class: "label is-small" do %>
+          <span class="icon-text">
+            <span class="icon is-small">
+              <i class="fas fa-oil-can"></i>
+            </span>
+            <span>Fat</span>
+          </span>
+        <% end %>
+        <div class="control has-icons-right">
+          <%= form.number_field :fats, 
+              class: "input is-small", 
+              placeholder: "0",
+              min: 0,
+              step: 0.1 %>
+          <span class="icon is-small is-right">
+            <span class="has-text-grey-light">g</span>
+          </span>
+        </div>
+      </div>
+    </div>
   </div>
-  <div>
-    <%= form.label :carbohydrates, class: "label", style: "display: block" %>
-    <%= form.number_field :carbohydrates, class: "input" %>
-  </div>
-  <div>
-    <%= form.label :fats, class: "label", style: "display: block" %>
-    <%= form.number_field :fats, class: "input" %>
-  </div>
-  <div>
-    <%= form.submit  class: "button is-sucess"%>
+
+  <!-- Submit Actions -->
+  <div class="field is-grouped is-grouped-right">
+    <div class="control">
+      <%= link_to "Cancel", entries_path, class: "button" %>
+    </div>
+    <div class="control">
+      <%= form.submit entry.persisted? ? "Update Entry" : "Add Entry", 
+          class: "button is-primary is-medium" %>
+    </div>
   </div>
 <% end %>
+
+<style>
+/* Application-wide form improvements */
+.food-log-form {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.food-log-form .field:not(:last-child) {
+  margin-bottom: 1.5rem;
+}
+
+.food-log-form .input:focus,
+.food-log-form .select select:focus {
+  border-color: #00d1b2;
+  box-shadow: 0 0 0 0.125em rgba(0, 209, 178, 0.25);
+}
+
+/* Responsive improvements */
+@media screen and (max-width: 768px) {
+  .food-log-form .columns {
+    margin: 0;
+  }
+  
+  .food-log-form .column {
+    padding: 0.5rem;
+  }
+}
+
+/* Visual feedback for validation */
+.food-log-form .input.is-danger {
+  animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+</style>
