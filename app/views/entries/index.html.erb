@@ -11,7 +11,7 @@
             <b class="card-header-title is-centered">
               <%= entry.meal_type %>
             </b>
-          </header> 
+          </header>
           <div class="card-content">
             <div class="content">
               <p><span class="has-text-weight-bold"><%= entry.calories %></span> calories</p>
@@ -23,10 +23,10 @@
           </div>
         </div>
         <div class="card-footer">
-          <div class="field is-grouped">
-            <%= link_to "Show", entry, class: "button is-primary is-expanded" %>
-            <%= link_to "Edit", edit_entry_path(entry), class: "button is-info is-expanded" %>
-            <%= button_to "Destroy", entry, method: :delete, data: { confirm: 'Are you sure?' }, class: "button is-danger is-expanded" %>
+          <div class="buttons" style="justify-content: center;">
+            <%= link_to "Show", entry, class: "button is-primary is-medium" %>
+            <%= link_to "Edit", edit_entry_path(entry), class: "button is-info is-medium" %>
+            <%= button_to "Destroy", entry, method: :delete, data: { confirm: 'Are you sure?' }, class: "button is-danger is-medium" %>
           </div>
         </div>
       </div>
