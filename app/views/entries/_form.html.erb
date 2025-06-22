@@ -10,7 +10,6 @@
       </ul>
     </div>
   <% end %>
-
   <!-- Meal Type Field with Dropdown -->
   <div class="field">
     <%= form.label :meal_type, class: "label" do %>
@@ -24,10 +23,10 @@
     <div class="control has-icons-left">
       <%= form.select :meal_type, 
           options_for_select([
-            ['Breakfast', 'breakfast'],
-            ['Lunch', 'lunch'], 
-            ['Dinner', 'dinner'],
-            ['Snack', 'snack']
+            ['Breakfast', 'Breakfast'],
+            ['Lunch', 'Lunch'], 
+            ['Dinner', 'Dinner'],
+            ['Snack', 'Snack']
           ], entry.meal_type),
           { prompt: 'Select meal type' },
           { class: "select is-fullwidth" } %>
@@ -36,7 +35,6 @@
       </div>
     </div>
   </div>
-
   <!-- Nutrition Fields in a Responsive Grid -->
   <div class="field is-grouped-multiline">
     <!-- Calories -->
@@ -64,7 +62,6 @@
       </div>
     </div>
   </div>
-
   <!-- Macronutrients in Columns -->
   <div class="field">
     <label class="label">Macronutrients</label>
@@ -89,7 +86,6 @@
           </span>
         </div>
       </div>
-
       <div class="column">
         <%= form.label :carbohydrates, class: "label is-small" do %>
           <span class="icon-text">
@@ -110,7 +106,6 @@
           </span>
         </div>
       </div>
-
       <div class="column">
         <%= form.label :fats, class: "label is-small" do %>
           <span class="icon-text">
@@ -133,7 +128,6 @@
       </div>
     </div>
   </div>
-
   <!-- Submit Actions -->
   <div class="field is-grouped is-grouped-right">
     <div class="control">
@@ -145,43 +139,42 @@
     </div>
   </div>
 <% end %>
-
 <style>
-/* Application-wide form improvements */
-.food-log-form {
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-.food-log-form .field:not(:last-child) {
-  margin-bottom: 1.5rem;
-}
-
-.food-log-form .input:focus,
-.food-log-form .select select:focus {
-  border-color: #00d1b2;
-  box-shadow: 0 0 0 0.125em rgba(0, 209, 178, 0.25);
-}
-
-/* Responsive improvements */
-@media screen and (max-width: 768px) {
-  .food-log-form .columns {
-    margin: 0;
+  /* Application-wide form improvements */
+  .food-log-form {
+    max-width: 600px;
+    margin: 0 auto;
   }
-  
-  .food-log-form .column {
-    padding: 0.5rem;
+
+  .food-log-form .field:not(:last-child) {
+    margin-bottom: 1.5rem;
   }
-}
 
-/* Visual feedback for validation */
-.food-log-form .input.is-danger {
-  animation: shake 0.5s ease-in-out;
-}
+  .food-log-form .input:focus,
+  .food-log-form .select select:focus {
+    border-color: #00d1b2;
+    box-shadow: 0 0 0 0.125em rgba(0, 209, 178, 0.25);
+  }
 
-@keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-5px); }
-  75% { transform: translateX(5px); }
-}
+  /* Responsive improvements */
+  @media screen and (max-width: 768px) {
+    .food-log-form .columns {
+      margin: 0;
+    }
+
+    .food-log-form .column {
+      padding: 0.5rem;
+    }
+  }
+
+  /* Visual feedback for validation */
+  .food-log-form .input.is-danger {
+    animation: shake 0.5s ease-in-out;
+  }
+
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+  }
 </style>
