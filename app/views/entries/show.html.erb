@@ -1,6 +1,9 @@
+<% content_for :title do %>
+  <%= @entry.meal_type %> &ndash; <%= Date.current.strftime("%B %d, %Y") %>
+<% end %>
 <%= render @entry %>
 <div class="card-footer">
-  <div class="buttons is-centered">
+  <div class="buttons is-centered is-moible">
     <%= link_to "Edit this entry", edit_entry_path(@entry), class: "button is-primary is-small" %>
     <%= link_to "Back to entries", entries_path, class: "button is-info is-small" %>
     <%= button_to "Destroy this entry", @entry, method: :delete, class: "button is-danger is-small" %>
